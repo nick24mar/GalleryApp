@@ -1,17 +1,19 @@
 <div class="container">
-  <form>
-    <h1 class="login-title">Log In GalleryApp</h1>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" [(ngModel)]="email" name="email" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="pass">Password:</label>
-      <input type="password" [(ngModel)]="password" name="password" class="form-control" required>
-    </div>
+  <div>
+    <form>
+      <h1 class="login-title">Log In GalleryApp</h1>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" [(ngModel)]="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="pass">Password:</label>
+        <input type="password" [(ngModel)]="password" name="password" class="form-control" required>
+      </div>
 
-    <button class="btn btn-outline-dark btn-block" (click)="signIn()">Sign In</button>
-    <button class="btn btn-danger btn-block" (click)="signInWithGoogle()">Sign In With Google</button>
-    <a routerLink="/signup" href="#" class="btn btn-block">No account? Signup here</a>
-  </form>
+      <button class="btn btn-outline-dark btn-block" (click)="signIn()">Sign In</button>
+      <button class="btn btn-danger btn-block" (click)="signInWithGoogle()">Sign In With Google</button>
+      <a routerLink="/signup" href="#" class="btn btn-block">No account? Signup here</a>
+    </form>
+  </div>
 </div>

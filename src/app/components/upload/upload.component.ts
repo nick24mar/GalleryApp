@@ -1,4 +1,7 @@
+import { UploadService } from './../../shared/upload.service';
+import { Upload } from './../../model/upload.model';
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-upload',
@@ -7,7 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
 
-  constructor() { }
+  files: FileList;
+  upload: Upload;
+
+  constructor(private uploadService: UploadService) {
+   }
+
+  handleFiles(event) {
+    this.files = event.target.files;
+  }
+
+  uploadFiles() {
+    const filesToUpload = this.files;
+    const filesIndex = _.range(filesToUpload.length);
+    _.each(filesIndex, (index) => {
+      //console.log(filesToUpload[index]);
+      this.upload = new Upload(filesToUpload[index]);
+      this.uploadService.uploadFile(this.upload);
+    });
+  }
 
   ngOnInit() {
   }

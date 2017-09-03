@@ -1,3 +1,11 @@
-<p>
-  gallery works!
-</p>
+<div class="row">
+  <h2>Latest Photos</h2>
+
+  <ul id="thumbnailList">
+    <li class="list-item" *ngFor="let image of images | async" class="img">
+      <a routerLink="['/image', image.$key]">
+        <img [src]="image.URL" class="img-thumbnail" class="tn">
+      </a>
+    </li>
+  </ul>
+</div>

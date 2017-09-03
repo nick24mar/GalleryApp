@@ -9,10 +9,9 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent {
 
-  onLoad: boolean = false;
   email: string;
   password: string;
-  err: string;
+  errorMsg: string;
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -20,15 +19,16 @@ export class LoginComponent {
     this.authService.login({ email: this.email, password: this.password })
       .then((resolve) => {
         this.router.navigate(['gallery'])
-        this.onLoad = true;
       })
-      .catch(error => this.err = error.message)
+      .catch((error) => this.errorMsg = error.message)
   }
 
   signInWithGoogle() {
     this.authService.signInWithGoogle()
-      .then( resolve => this.router.navigate(['gallery']))
-      .catch(error => this.err = error.message)
+      .then( (resolve) => {
+        this.router.navigate(['gallery'])
+      })
+      .catch(error => this.errorMsg = error.message)
   }
 
   signOut() {
