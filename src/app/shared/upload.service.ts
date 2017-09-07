@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 
@@ -11,10 +13,20 @@ export class UploadService {
 
   private basePath = '/uploads';
   private uploads: FirebaseListObservable<GalleryImage[]>;
+  private user:any;
   
-  constructor(private ngFire: AngularFireModule, private db: AngularFireDatabase, private router: Router) { }
+  constructor(private ngFire: AngularFireModule,
+    private db: AngularFireDatabase,
+    private router: Router,
+    private afAuth: AngularFireAuth) {
+       this.afAuth.authState.subscribe( (auth => {
+        if ( auth ) {
+          this.user = auth;
+        }
+       }));
+  }
 
-  uploadFile(upload: Upload) {
+  uploadFile(upload: Upload, caption: string) {
     const storageRef = firebase.storage().ref();
     const taskUpload = storageRef.child(`${this.basePath}/${upload.file.name}`)
       .put(upload.file);
@@ -29,7 +41,10 @@ export class UploadService {
         },
         (): any => {
           upload.URL = taskUpload.snapshot.downloadURL;
-          upload.name = upload.file.name;
+          upload.userDisplayName = this.user.displayName;
+          upload.userPhotoURL = this.user.photoURL;
+          upload.createdOn = Date.now();
+          upload.caption = caption;
           this.saveFileData(upload);
           this.router.navigate(['gallery']);
         }

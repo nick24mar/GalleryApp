@@ -1,11 +1,63 @@
 <div class="row">
-  <h2>Latest Photos</h2>
+  <ul class="list-unstyled" id="thumbnailList">
+    <li class="media" *ngFor="let image of images | async" class="img">
+      <!--
+      <div class="card-columns">
+        <div class="card">
+          <img class="card-img-top" [src]="image.URL" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">
+              <img [src]="image.userPhotoURL" class="rounded-circle" width="50px"> {{ image.userDisplayName }}
+            </h4>
+            <small class="text-muted date-created">
+              {{ image.createdOn | date:'fullDate' }}
+            </small>
+            
+            <hr>
+            <p class="card-text">
+              {{ image.caption }}
+            </p>
 
-  <ul id="thumbnailList">
-    <li class="list-item" *ngFor="let image of images | async" class="img">
-      <a routerLink="['/image', image.$key]">
-        <img [src]="image.URL" class="img-thumbnail" class="tn">
-      </a>
+            <div class="card-text">
+              <button class="btn btn-outline-dark btn-sm">Like</button>
+            </div>
+
+          </div>
+        </div>
+      </div> -->
+
+      <div class="custom-card">
+        <div class="card-title">
+          <img [src]="image.userPhotoURL" alt=""> {{ image.userDisplayName }}
+        </div>
+        <div class="card-body">
+          <img [src]="image.URL" class="img-fluid" width="100%">
+        </div>
+        <div class="card-footer">
+          <p><span class="user-caption">{{ image.userDisplayName }}</span>&nbsp;{{ image.caption }}</p>
+          <small class="text-muted date-created">
+              {{ image.createdOn | date:'fullDate' }}
+          </small>
+        </div>
+      </div>
+      <!--
+      <div class="media">
+        <img class="d-flex align-self-start mr-3 rounded-circle" [src]="image.userPhotoURL" width="50px">
+        <div class="media-body">
+          <h5 class="mt-0 user-prof-name">{{ image.userDisplayName }} </h5>
+            <figure class="figure">
+              <figcaption class="text-left">
+                <p>{{ image.caption }}</p>
+              </figcaption>
+              <a [routerLink]="['/image', image.$key]">
+                <img [src]="image.URL" 
+                  class="figure-img img-fluid"
+                  alt="A generic square placeholder image with rounded corners in a figure.">
+              </a>
+            </figure>
+        </div>
+      </div>
+    -->
     </li>
   </ul>
 </div>

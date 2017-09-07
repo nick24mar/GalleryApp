@@ -30,7 +30,7 @@ import { SignupComponent } from './components/signup/signup.component';
     ImageDetailComponent,
     UploadComponent,
     NavbarComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

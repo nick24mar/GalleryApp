@@ -9,24 +9,22 @@ import * as _ from 'lodash';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-
   files: FileList;
   upload: Upload;
-
-  constructor(private uploadService: UploadService) {
-   }
+  constructor(private uploadService: UploadService) { }
 
   handleFiles(event) {
     this.files = event.target.files;
   }
 
-  uploadFiles() {
+  uploadFiles(input: HTMLInputElement) {
     const filesToUpload = this.files;
     const filesIndex = _.range(filesToUpload.length);
+    let caption = input.value;
     _.each(filesIndex, (index) => {
       //console.log(filesToUpload[index]);
       this.upload = new Upload(filesToUpload[index]);
-      this.uploadService.uploadFile(this.upload);
+      this.uploadService.uploadFile(this.upload, caption);
     });
   }
 
